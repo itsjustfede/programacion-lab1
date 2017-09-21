@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1505736091 source:c:\users\alumno\desktop\programadores\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+
+1505745905 source:c:\users\alumno\desktop\fede\ejercicios en clase\18sep\programadores\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+
