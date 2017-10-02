@@ -1,0 +1,24 @@
+# depslib dependency file v1.0
+1506524124 source:c:\users\alumno\desktop\fede\123\ejercicios en clase\27sep\relaciones\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
+1506524278 c:\users\alumno\desktop\fede\123\ejercicios en clase\27sep\relaciones\funciones.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+
+1506519703 source:c:\users\alumno\desktop\fede\123\ejercicios en clase\27sep\relaciones\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
