@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1507129364 source:d:\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"Estacionamiento.h"
+
+1507129371 d:\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1507129364 source:d:\1a_pp_arevalo_federico\1a_pp_arevalo_federico\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"Estacionamiento.h"
+
