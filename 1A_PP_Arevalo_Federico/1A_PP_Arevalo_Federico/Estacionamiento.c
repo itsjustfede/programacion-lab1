@@ -251,7 +251,7 @@ void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam)
         {
             strcpy(nuevoAutomovil.patente, patente);
 
-            printf("Ingrese marca \n 1- Alpha Romeo \n 2- Ferrari \n 3- Audi \n 4- Otro \n");
+            printf("Ingrese marca \n 1- Alpha Romeo \n 2- Ferrari \n 3- Audi \n 4- Otro \n\n");
             scanf("%d", &nuevoAutomovil.marca);
 
             printf("Ingrese dueno por ID: ");
@@ -349,7 +349,7 @@ void ordenarAutomoviles(eCars cars[], int tam)
     {
         for (j = i + 1; j < tam; j++)
         {
-            if (strcmpi(cars[i].patente, cars[j].patente) > 0)
+            if (stricmp(cars[i].patente, cars[j].patente) > 0)
             {
                 aux = cars[i];
                 cars[i] = cars[j];
