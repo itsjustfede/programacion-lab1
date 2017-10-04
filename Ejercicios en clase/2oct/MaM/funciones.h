@@ -21,7 +21,7 @@ typedef struct{
 
 void mostrarAlumnosConMaterias(eAlumno alumnos[], int tamAlumnos, eMateria materias[], int tamMaterias, eInscripcion inscripcion[], int tamInscripcion);
 void mostrarMateriasConCantidadDeInscriptos(eMateria materias[], int tamMateria, eInscripcion inscripciones[], int tamInscripciones);
-// int maximosInscriptos(int materia, eInscripciones inscripciones, int tamInscripciones);
+int maximosInscriptos(int materia, eInscripcion inscripciones[], int tamInscripcion);
 void materiaMasCursada(eMateria materias[], int tamMateria, eInscripcion inscripciones[], int tamInscripciones);
 //void mostrarMateriasConAlumnos()
 

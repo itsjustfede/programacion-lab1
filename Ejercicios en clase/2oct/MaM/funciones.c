@@ -32,7 +32,7 @@ void mostrarAlumnosConMaterias(eAlumno alumnos[], int tamAlumnos, eMateria mater
 
 void mostrarMateriasConCantidadDeInscriptos(eMateria materias[], int tamMateria, eInscripcion inscripciones[], int tamInscripciones)
 {
-    int i, j, contador;
+    int i, contador;
 
     printf("\n---- Materias con cantidad de inscriptos ----\n\n");
 
@@ -41,44 +41,60 @@ void mostrarMateriasConCantidadDeInscriptos(eMateria materias[], int tamMateria,
         printf("%s: ", materias[i].descripcion);
         contador = 0;
 
-        for (j = 0; j < tamInscripciones; j++)
+        contador = maximosInscriptos(materias[i].id, inscripciones, tamInscripciones);
+
+        /*for (j = 0; j < tamInscripciones; j++)
         {
             if (materias[i].id == inscripciones[j].idMateria)
                 contador++;
-        }
+        }*/
+
         printf("%d\n", contador);
     }
 }
 
+int maximosInscriptos(int materia, eInscripcion inscripciones[], int tamInscripciones)
+{
+    int cantidad = 0, i;
+
+    for (i = 0; i < tamInscripciones; i++)
+        {
+            if (materia == inscripciones[i].idMateria)
+                cantidad++;
+        }
+
+    return cantidad;
+}
+
 void materiaMasCursada(eMateria materias[], int tamMateria, eInscripcion inscripciones[], int tamInscripciones)
 {
-    int i, j, contador, max, flag = 1;
+    int i, j, maximo, contador, flag = 1;
 
     printf("\n---- Materia mas cursada ----\n\n");
 
     for (i = 0; i < tamMateria; i++)
     {
         contador = 0;
+
         for (j = 0; j < tamInscripciones; j++)
         {
-            if (materias[i].id == inscripciones[j].idMateria)
+            if (inscripciones[j].idMateria == materias[i].id)
             {
                 contador++;
             }
         }
-        if (flag)
+        if (flag || contador > maximo)
         {
+            maximo = contador;
             flag = 0;
-            max = contador;
         }
-        else if (contador > max)
-            max = contador;
-
 
     }
 
-}
 
+printf("%d", maximo);
+
+}
 
 
 

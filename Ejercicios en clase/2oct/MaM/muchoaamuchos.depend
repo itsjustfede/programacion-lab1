@@ -23,3 +23,23 @@
 	<ctype.h>
 	"funciones.h"
 
+1507086786 source:f:\usuarios\alumno\escritorio\facu\lab\ejercicios en clase\2oct\mam\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1507086773 f:\usuarios\alumno\escritorio\facu\lab\ejercicios en clase\2oct\mam\funciones.h
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+
+1507087080 source:f:\usuarios\alumno\escritorio\facu\lab\ejercicios en clase\2oct\mam\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+	"funciones.h"
+
