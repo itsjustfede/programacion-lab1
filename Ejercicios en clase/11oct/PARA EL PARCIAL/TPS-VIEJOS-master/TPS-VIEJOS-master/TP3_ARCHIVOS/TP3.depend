@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1497309913 source:c:\users\oldsnake\desktop\tps-viejos-master\tps-viejos-master\tp3_archivos\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<ctype.h>
+	"funciones.h"
+
+1497309360 c:\users\oldsnake\desktop\tps-viejos-master\tps-viejos-master\tp3_archivos\funciones.h
+
+1497309656 source:c:\users\oldsnake\desktop\tps-viejos-master\tps-viejos-master\tp3_archivos\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"funciones.h"
+

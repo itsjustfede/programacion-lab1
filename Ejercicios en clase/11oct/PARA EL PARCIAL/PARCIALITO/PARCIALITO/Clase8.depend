@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1498791000 source:c:\users\oldsnake\desktop\parcialito\parcialito\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1463521274 c:\users\oldsnake\desktop\parcialito\parcialito\arraylist.h
+
+1498796587 source:c:\users\oldsnake\desktop\parcialito\parcialito\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"my_func.h"
+	"ArrayList.h"
+
+1498796587 c:\users\oldsnake\desktop\parcialito\parcialito\my_func.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"ArrayList.h"
+
+1498796552 source:c:\users\oldsnake\desktop\parcialito\parcialito\my_func.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"my_func.h"
+

@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1498066361 source:c:\users\oldsnake\desktop\practica_pair_v1.3 (1)\practica_pair_v1.2\windows_32\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1463521274 c:\users\oldsnake\desktop\practica_pair_v1.3 (1)\practica_pair_v1.2\windows_32\arraylist.h
+
+1477571236 source:c:\users\oldsnake\desktop\practica_pair_v1.3 (1)\practica_pair_v1.2\windows_32\employee.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"Employee.h"
+
+1477571236 c:\users\oldsnake\desktop\practica_pair_v1.3 (1)\practica_pair_v1.2\windows_32\employee.h
+
+1464384470 source:c:\users\oldsnake\desktop\practica_pair_v1.3 (1)\practica_pair_v1.2\windows_32\parser.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"Employee.h"
+
+1498066381 source:c:\users\oldsnake\desktop\practica_pair_v1.3 (1)\practica_pair_v1.2\windows_32\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"Employee.h"
+

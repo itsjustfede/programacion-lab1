@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1498791000 source:c:\users\oldsnake\desktop\tp4\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1463521274 c:\users\oldsnake\desktop\tp4\arraylist.h
+
+1499315343 source:c:\users\oldsnake\desktop\tp4\employee.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"Employee.h"
+
+1499315462 c:\users\oldsnake\desktop\tp4\employee.h
+
+1498791356 source:c:\users\oldsnake\desktop\tp4\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"Employee.h"
+	"parser.h"
+
+1498791350 c:\users\oldsnake\desktop\tp4\parser.h
+	<stdio.h>
+	<stdlib.h>
+
+1498794281 source:c:\users\oldsnake\desktop\tp4\parser.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"Employee.h"
+	"parser.h"
+

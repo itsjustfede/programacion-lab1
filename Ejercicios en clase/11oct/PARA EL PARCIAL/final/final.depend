@@ -1,0 +1,49 @@
+# depslib dependency file v1.0
+1499323277 source:c:\users\oldsnake\desktop\para el parcial\final\arraylist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+
+1499317398 c:\users\oldsnake\desktop\para el parcial\final\arraylist.h
+
+1499367059 source:c:\users\oldsnake\desktop\para el parcial\final\funcionesvarias.c
+	"funcionesVarias.h"
+	"usuario.h"
+	"post.h"
+
+1499366999 c:\users\oldsnake\desktop\para el parcial\final\funcionesvarias.h
+	"ArrayList.h"
+
+1499366411 c:\users\oldsnake\desktop\para el parcial\final\usuario.h
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+
+1499366337 c:\users\oldsnake\desktop\para el parcial\final\post.h
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+
+1499324216 source:c:\users\oldsnake\desktop\para el parcial\final\main.c
+	<stdio.h>
+	<stdlib.h>
+	"ArrayList.h"
+	"post.h"
+	"usuario.h"
+	"funcionesVarias.h"
+
+1499366411 source:c:\users\oldsnake\desktop\para el parcial\final\usuario.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"usuario.h"
+
+1499366337 source:c:\users\oldsnake\desktop\para el parcial\final\post.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"ArrayList.h"
+	"post.h"
+
