@@ -17,3 +17,22 @@
 	<conio.h>
 	"Estacionamiento.h"
 
+1508295703 source:f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"Estacionamiento.h"
+
+1508295540 f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1508296006 source:f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+	"Estacionamiento.h"
+

@@ -2,7 +2,13 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
+#include <ctype.h>
 #include "Estacionamiento.h"
+
+#define ALPHA_ROMEO 1
+#define FERRARI 2
+#define AUDI 3
+#define OTRO 4
 
 /** \brief
  *
@@ -18,10 +24,10 @@ int menu()
     printf("\n***ESTACIONAMIENTO***\n\n\n");
     printf("1- Alta Dueno\n");
     printf("2- Modificacion Dueno\n");
-    printf("3- Baja Dueno\n");
+    printf("3- ----\n");
     printf("4- Ingreso Automovil\n");
     printf("5- Egreso Automovil\n");
-    printf("6- Listado de Automoviles\n");
+    printf("6- Informes\n");
     printf("7- Salir\n");
     printf("\n\nIngrese opcion: ");
     scanf("%d", &opcion);
@@ -254,7 +260,7 @@ void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam)
             printf("Ingrese marca \n 1- Alpha Romeo \n 2- Ferrari \n 3- Audi \n 4- Otro \n\n");
             scanf("%d", &nuevoAutomovil.marca);
 
-            printf("Ingrese dueno por ID: ");
+            printf("Ingrese dueno por ID: \n");
             mostrarDuenos(duenos, tamDuenos);
             scanf("%d", &nuevoAutomovil.dueno);
 
@@ -279,7 +285,7 @@ void mostrarAutomovilesEstacionados(eDueno duenos[], int tamDuenos, eCars cars[]
 {
     int i;
 
-    printf("Patente -- H de Entrada -- Marca -- Dueno  -- Direccion  --  N Tarjeta de C\n\n");
+    printf("Patente -- H. Entrada -- Marca -- Dueno  -- Direccion  --  N Tarjeta de C\n\n");
 
     for (i = 0; i < tam; i++)
     {
@@ -319,15 +325,15 @@ void mostrarAutomovilEstacionado(eDueno duenos[], int tamDuenos, eCars cars)
     if (cars.estado == 1)
     {
         printf("%s -- %d -- %s -- ", cars.patente, cars.horarioDeEntrada, marca);
-    //recorro dueños
-    for (i = 0; i < tamDuenos; i++)
+        //recorro dueños
+        for (i = 0; i < tamDuenos; i++)
 
-    {
-        if (duenos[i].estado == 1 && duenos[i].idDueno == cars.dueno)
         {
-            printf("%s -- %s -- %d\n", duenos[i].nombreYApellido, duenos[i].direccion, duenos[i].numeroDeTarjetaDeCredito);
+            if (duenos[i].estado == 1 && duenos[i].idDueno == cars.dueno)
+            {
+                printf("%s -- %s -- %d\n", duenos[i].nombreYApellido, duenos[i].direccion, duenos[i].numeroDeTarjetaDeCredito);
+            }
         }
-    }
     }
 
 }
@@ -349,14 +355,14 @@ void ordenarAutomoviles(eCars cars[], int tam)
     {
         for (j = i + 1; j < tam; j++)
         {
-            if (stricmp(cars[i].patente, cars[j].patente) > 0)
+            if (cars[i].horarioDeEntrada > cars[j].horarioDeEntrada)
             {
                 aux = cars[i];
                 cars[i] = cars[j];
                 cars[j] = aux;
             }
-            if (strcmpi(cars[i].patente, cars[j].patente) == 0)
-                if (cars[i].horarioDeEntrada > cars[j].horarioDeEntrada)
+            if (cars[i].horarioDeEntrada == cars[j].horarioDeEntrada)
+                if (stricmp(cars[i].patente, cars[j].patente) > 0)
                 {
                     aux = cars[i];
                     cars[i] = cars[j];
@@ -382,7 +388,7 @@ void hardcodearCars(eCars cars[])
 
     int i;
 
-      for (i = 0; i < 5; i++)
+    for (i = 0; i < 5; i++)
     {
         strcpy(cars[i].patente, patente[i]);
         cars[i].dueno = dueno[i];
@@ -392,6 +398,154 @@ void hardcodearCars(eCars cars[])
     }
 
 }
+
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
+int validarEntero(char num[])
+{
+    int i, numero = 1;
+
+    for(i = 0; i<strlen(num); i++)
+    {
+        if(!(isdigit(num[i])))
+        {
+            printf("\nNumero invalido! Reingrese: \n");
+            getch();
+            numero = 0;
+            break;
+        }
+    }
+
+    return numero;
+}
+
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
+int enteroValidado(char numero[])
+{
+    int numerin, numerovalido;
+
+    do
+    {
+        printf("Ingrese un numero: \n");
+        scanf("%s",numero);
+        numerin = validarEntero(numero);
+
+    }
+    while(numerin == 0);
+
+    numerovalido = atoi(numero);
+
+    return numerovalido;
+}
+
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
+void mostrarPropietariosDeAudis(eDueno duenos[], int tamDuenos, eCars cars[], int tamCars)
+{
+    int i, j, bandera = 1;
+
+    printf("Todos los propietarios de autos de marca Audi\n\n");
+
+    for (i = 0; i < tamCars; i++)
+    {
+        if (cars[i].estado == 1 && cars[i].marca == AUDI)
+        {
+            for (j = 0; j < tamDuenos; j++)
+            {
+                if (duenos[j].estado == 1 && duenos[j].idDueno == cars[i].dueno)
+                {
+                    printf("%s -- %s -- %d\n", duenos[j].nombreYApellido, duenos[j].direccion, duenos[j].numeroDeTarjetaDeCredito);
+                    bandera = 0;
+                }
+            }
+        }
+
+
+    }
+
+    if (bandera)
+    printf("Ningun cliente posee un auto de marca Audi");
+
+}
+
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
+void modificarDueno(eDueno duenos[], int tam)
+{
+    int i, id, bandera;
+    char respuesta;
+
+    printf("Ingrese el ID: ");
+    scanf("%d", &id);
+
+    for (i = 0; i < tam; i++)
+    {
+        if (duenos[i].estado == 1 && duenos[i].idDueno == id)
+        {
+            printf("Seguro que desea modificar a ");
+            printf("%s? ", duenos[i].nombreYApellido);
+            printf("S/N\n");
+            fflush(stdin);
+            scanf("%c", &respuesta);
+
+            respuesta = tolower(respuesta);
+
+            if (respuesta == 's')
+            {
+                printf("Numero actual de tarjeta de credito: %d\n", duenos[i].numeroDeTarjetaDeCredito);
+                printf("Ingrese el nuevo numero de tarjeta de credito: ");
+                scanf("%d", &duenos[i].numeroDeTarjetaDeCredito);
+                printf("Modificacion exitosa");
+            }
+            else
+            {
+                printf("Accion cancelada");
+            }
+            bandera = 0;
+            break;
+        }
+
+    }
+
+    if (bandera)
+        printf("El ID no existe");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

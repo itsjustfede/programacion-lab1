@@ -36,5 +36,7 @@ void mostrarAutomovilesEstacionados(eDueno duenos[], int tamDuenos, eCars cars[]
 void mostrarAutomovilEstacionado(eDueno duenos[], int tamDuenos, eCars cars);
 void ordenarAutomoviles(eCars cars[], int tam);
 void hardcodearCars(eCars cars[]);
-
-
+int validarEntero(char num[]);
+int enteroValidado(char numero[]);
+void mostrarPropietariosDeAudis(eDueno duenos[], int tamDuenos, eCars cars[], int tamCars);
+void modificarDueno(eDueno duenos[], int tam);

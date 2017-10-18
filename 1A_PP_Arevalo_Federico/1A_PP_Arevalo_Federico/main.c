@@ -30,44 +30,40 @@ int main()
 
         case 1:
             system("cls");
-            //altaDueno(duenos, DUENOS);
+            altaDueno(duenos, DUENOS);
             getch();
-
             break;
 
         case 2:
             system("cls");
-
+            modificarDueno(duenos, DUENOS);
             getch();
-
-
             break;
 
         case 3:
             system("cls");
 
             getch();
-
             break;
 
         case 4:
             system("cls");
             ingresoAutmovil(duenos, DUENOS, cars, CARS);
             getch();
-
             break;
 
         case 5:
             system("cls");
 
             getch();
-
             break;
 
         case 6:
             system("cls");
             ordenarAutomoviles(cars, CARS);
-            mostrarAutomovilesEstacionados(duenos, DUENOS, cars, CARS);
+            //mostrarAutomovilesEstacionados(duenos, DUENOS, cars, CARS);
+
+            mostrarPropietariosDeAudis(duenos, DUENOS, cars, CARS);
             getch();
 
             break;
