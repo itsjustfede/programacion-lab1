@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1491347347 source:d:\paralelos\main.c
+	<stdio.h>
+	<stdlib.h>
+
