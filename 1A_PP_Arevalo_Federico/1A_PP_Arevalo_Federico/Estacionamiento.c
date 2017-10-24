@@ -5,18 +5,13 @@
 #include <ctype.h>
 #include "Estacionamiento.h"
 
+#define TOTAL 0
+
 #define ALPHA_ROMEO 1
 #define FERRARI 2
 #define AUDI 3
 #define OTRO 4
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 int menu()
 {
     int opcion;
@@ -24,11 +19,10 @@ int menu()
     printf("\n***ESTACIONAMIENTO***\n\n\n");
     printf("1- Alta Dueno\n");
     printf("2- Modificacion Dueno\n");
-    printf("3- ----\n");
-    printf("4- Ingreso Automovil\n");
-    printf("5- Egreso Automovil\n");
-    printf("6- Informes\n");
-    printf("7- Salir\n");
+    printf("3- Ingreso Automovil\n");
+    printf("4- Egreso Automovil\n");
+    printf("5- Informes\n");
+    printf("6- Salir\n");
     printf("\n\nIngrese opcion: ");
     scanf("%d", &opcion);
 
@@ -36,13 +30,6 @@ int menu()
 
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 void inicializarVectorDuenos(eDueno duenos[], int tam)
 {
     int i;
@@ -52,13 +39,6 @@ void inicializarVectorDuenos(eDueno duenos[], int tam)
     }
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 void inicializarVectorCars(eCars cars[], int tam)
 {
     int i;
@@ -68,13 +48,6 @@ void inicializarVectorCars(eCars cars[], int tam)
     }
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 int buscarDuenoLibre(eDueno duenos[], int tam)
 {
     int i;
@@ -91,13 +64,6 @@ int buscarDuenoLibre(eDueno duenos[], int tam)
     return indice;
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 int buscarDueno(int id, eDueno dueno[], int tam)
 {
     int i;
@@ -114,14 +80,7 @@ int buscarDueno(int id, eDueno dueno[], int tam)
     return indice;
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
-void altaDueno(eDueno duenos[], int tam)
+void altaDueno(eDueno duenos[], int tam, int* bandera)
 {
     eDueno nuevoDueno;
     int esta, id, lugar;
@@ -161,17 +120,12 @@ void altaDueno(eDueno duenos[], int tam)
             nuevoDueno.estado = 1;
 
             duenos[lugar] = nuevoDueno;
+
+            *bandera = 0;
         }
     }
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 void mostrarDuenos(eDueno duenos[], int tam)
 {
     int i;
@@ -199,13 +153,6 @@ int buscarAutomovilLibre(eCars cars[], int tam)
     return indice;
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 int buscarAtomovil(char patente[], eCars cars[], int tam)
 {
     int i;
@@ -222,14 +169,7 @@ int buscarAtomovil(char patente[], eCars cars[], int tam)
     return indice;
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
-void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam)
+void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int* bandera)
 {
     eCars nuevoAutomovil;
     int esta, lugar;
@@ -270,17 +210,12 @@ void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam)
             nuevoAutomovil.estado = 1;
 
             cars[lugar] = nuevoAutomovil;
+
+            *bandera = 0;
         }
     }
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 void mostrarAutomovilesEstacionados(eDueno duenos[], int tamDuenos, eCars cars[], int tam)
 {
     int i;
@@ -293,13 +228,6 @@ void mostrarAutomovilesEstacionados(eDueno duenos[], int tamDuenos, eCars cars[]
     }
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 void mostrarAutomovilEstacionado(eDueno duenos[], int tamDuenos, eCars cars)
 {
     int i;
@@ -338,13 +266,6 @@ void mostrarAutomovilEstacionado(eDueno duenos[], int tamDuenos, eCars cars)
 
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 void ordenarAutomoviles(eCars cars[], int tam)
 {
     int i, j;
@@ -372,17 +293,10 @@ void ordenarAutomoviles(eCars cars[], int tam)
     }
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 void hardcodearCars(eCars cars[])
 {
     char patente[][10] =  {"ABC123", "DFG456", "HIJ674", "JRD842", "KLM654"};
-    int marca[] =  {1, 1, 2, 4, 4};
+    int marca[] =  {AUDI, AUDI, 2, 4, 4};
     int dueno[] = {1, 2, 3, 4, 5};
     int horario[] = {10, 12, 12, 13, 13};
 
@@ -399,63 +313,6 @@ void hardcodearCars(eCars cars[])
 
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
-int validarEntero(char num[])
-{
-    int i, numero = 1;
-
-    for(i = 0; i<strlen(num); i++)
-    {
-        if(!(isdigit(num[i])))
-        {
-            printf("\nNumero invalido! Reingrese: \n");
-            getch();
-            numero = 0;
-            break;
-        }
-    }
-
-    return numero;
-}
-
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
-int enteroValidado(char numero[])
-{
-    int numerin, numerovalido;
-
-    do
-    {
-        printf("Ingrese un numero: \n");
-        scanf("%s",numero);
-        numerin = validarEntero(numero);
-
-    }
-    while(numerin == 0);
-
-    numerovalido = atoi(numero);
-
-    return numerovalido;
-}
-
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 void mostrarPropietariosDeAudis(eDueno duenos[], int tamDuenos, eCars cars[], int tamCars)
 {
     int i, j, bandera = 1;
@@ -480,17 +337,10 @@ void mostrarPropietariosDeAudis(eDueno duenos[], int tamDuenos, eCars cars[], in
     }
 
     if (bandera)
-    printf("Ningun cliente posee un auto de marca Audi");
+        printf("Ningun cliente posee un auto de marca Audi");
 
 }
 
-/** \brief
- *
- * \param
- * \param
- * \return
- *
- */
 void modificarDueno(eDueno duenos[], int tam)
 {
     int i, id, bandera;
@@ -532,14 +382,160 @@ void modificarDueno(eDueno duenos[], int tam)
         printf("El ID no existe");
 }
 
+void egresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int arrayDeRecaudacion[])
+{
+    int i, esta, validar = 1, horaDeSalida, valorDeEstadia;
+    char patente[30];
+    char respuesta;
 
 
+    printf("\nIngrese el la patente: ");
+    fflush(stdin);
+    gets(patente);
 
+    esta = buscarAtomovil(patente, cars, tam);
 
+    if (esta == -1)
+    {
+        printf("Ese auto no existe");
+    }
+    else
+    {
+        for (i = 0; i < tamDuenos; i++)
+        {
+            if (cars[esta].dueno == duenos[i].idDueno)
+            {
+                break;
+            }
 
+        }
 
+        printf("El dueno de este auto es \"%s\"? S/N \n", duenos[i].nombreYApellido);
+        fflush(stdin);
+        scanf("%c", &respuesta);
 
+        respuesta = tolower(respuesta);
 
+        while(validar)
+        {
+            if (respuesta == 's')
+            {
+                validar = 0;
+                printf("Ingrese la hora de salida (sabiendo que ingreso a la(s) %dhs): ", cars[esta].horarioDeEntrada);
+                scanf("%d", &horaDeSalida);
+
+                while(horaDeSalida < 0 || horaDeSalida > 24)
+                {
+                    printf("El auto ingreso a la(s) %dhs): ", cars[esta].horarioDeEntrada);
+                    printf("y no puede permanecer mas de un dia, ingrese una hora correta: ");
+                    scanf("%d", &horaDeSalida);
+                }
+
+                valorDeEstadia = calcularRecaudacionDeAuto(cars[esta].horarioDeEntrada, horaDeSalida, cars[esta].marca, arrayDeRecaudacion);
+
+                generarTicket(cars[esta], duenos[i], valorDeEstadia, cars[esta].marca);
+
+                cars[esta].estado = 0;
+
+                break;
+
+            }
+            else if (respuesta == 'n')
+            {
+                validar = 0;
+                printf("Accion cancelada");
+                break;
+            }
+            printf("Ingrese S/N");
+            fflush(stdin);
+            scanf("%c", &respuesta);
+            respuesta = tolower(respuesta);
+        }
+    }
+}
+
+int calcularRecaudacionDeAuto(int horaDeEntrada, int horaDeSalida, int marca, int arrayDeRecaudacion[])
+{
+    int costo;
+
+    if (marca == ALPHA_ROMEO)
+    {
+        costo = (horaDeSalida - horaDeEntrada) * 150;
+    }
+    else if (marca == FERRARI)
+    {
+        costo = (horaDeSalida - horaDeEntrada) * 175;
+    }
+    else if (marca == AUDI)
+    {
+        costo = (horaDeSalida - horaDeEntrada) * 200;
+    }
+    else
+    {
+        costo = (horaDeSalida - horaDeEntrada) * 250;
+    }
+
+    recaudar(costo, marca, arrayDeRecaudacion);
+
+    return costo;
+}
+
+void generarTicket(eCars car, eDueno dueno, int valorDeEstadia, int marca)
+{
+    char marquita[20];
+
+    printf("\n------------------------------------------------------------\n");
+
+    printf("Nombre del dueno: %s\n", dueno.nombreYApellido);
+    printf("Su patente: %s\n", car.patente);
+
+    if (car.marca == ALPHA_ROMEO)
+        strcpy(marquita, "Alpha Romeo");
+    else if (car.marca == FERRARI)
+        strcpy(marquita, "Ferrari");
+    else if (car.marca == AUDI)
+        strcpy(marquita, "Audi");
+    else
+        strcpy(marquita, "Otro");
+    printf("La marca: %s\n", marquita);
+    printf("Valor de la estadia: $%d", valorDeEstadia);
+
+    printf("\n------------------------------------------------------------\n");
+}
+
+void recaudar(int recaudacion, int marca, int arrayDeRecaudacion[])
+{
+    if (marca == ALPHA_ROMEO)
+    {
+        arrayDeRecaudacion[ALPHA_ROMEO] = arrayDeRecaudacion[ALPHA_ROMEO] + recaudacion;
+    }
+    else if (marca == FERRARI)
+    {
+        arrayDeRecaudacion[FERRARI] = arrayDeRecaudacion[FERRARI] + recaudacion;
+    }
+    else if (marca == AUDI)
+    {
+        arrayDeRecaudacion[AUDI] = arrayDeRecaudacion[AUDI] + recaudacion;
+    }
+    else
+    {
+        arrayDeRecaudacion[OTRO] = arrayDeRecaudacion[OTRO] + recaudacion;
+    }
+
+    arrayDeRecaudacion[TOTAL] = arrayDeRecaudacion[TOTAL] + recaudacion;
+}
+
+void mostrarRecaudacion(int arrayDeRecaudacion[])
+{
+    printf("\n------------------------------------------------------------\n");
+    printf("Recaudacion Total: %d\n\n", arrayDeRecaudacion[TOTAL]);
+    printf("Recaudacion por marca\n\n");
+    printf("Alfa Romeo: %d\n", arrayDeRecaudacion[ALPHA_ROMEO]);
+    printf("Ferrari: %d\n", arrayDeRecaudacion[FERRARI]);
+    printf("Audi: %d\n", arrayDeRecaudacion[AUDI]);
+    printf("Otro: %d", arrayDeRecaudacion[OTRO]);
+    printf("\n------------------------------------------------------------\n");
+}
 
 
 

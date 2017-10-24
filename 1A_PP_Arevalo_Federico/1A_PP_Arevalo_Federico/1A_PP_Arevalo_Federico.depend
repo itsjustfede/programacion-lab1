@@ -17,22 +17,35 @@
 	<conio.h>
 	"Estacionamiento.h"
 
-1508295703 source:f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\main.c
+1508870393 source:f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\main.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
 	"Estacionamiento.h"
 
-1508295540 f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.h
+1508871788 f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1508296006 source:f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.c
+1508871788 source:f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
 	<string.h>
 	<ctype.h>
 	"Estacionamiento.h"
+
+1508868921 source:f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+	"validaciones.h"
+
+1508868921 f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\validaciones.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
 
