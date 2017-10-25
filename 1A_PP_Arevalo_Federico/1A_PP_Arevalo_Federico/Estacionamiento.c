@@ -130,7 +130,8 @@ void altaDueno(eDueno duenos[], int tam, int* bandera)
 {
     eDueno nuevoDueno;
     int esta, id, lugar;
-    char cadenaAux[100];
+    char aux[100];
+    char nombreAux[100];
 
     lugar = buscarDuenoLibre(duenos, tam);
 
@@ -142,15 +143,15 @@ void altaDueno(eDueno duenos[], int tam, int* bandera)
     {
         printf("\nIngrese el ID: ");
         fflush(stdin);
-        gets(cadenaAux);
+        gets(aux);
 
-        if (validarNumero(cadenaAux) == 0)
+        if (validarNumero(aux) == 0)
         {
             printf("Debe ingresar solo numeros");
         }
         else
         {
-            id = atoi(cadenaAux);
+            id = atoi(aux);
 
             esta = buscarDueno(id, duenos, tam);
 
@@ -162,17 +163,33 @@ void altaDueno(eDueno duenos[], int tam, int* bandera)
             {
                 nuevoDueno.idDueno = id;
 
-                printf("Ingrese nombre y apellido: ");
+                printf("Ingrese nombre: ");
                 fflush(stdin);
-                gets(cadenaAux);
+                gets(nombreAux);
 
-                while (validarSoloLetras(cadenaAux) == 0)
+                while (validarSoloLetras(nombreAux) == 0)
                 {
                     printf("Ingrese solo letras: ");
                     fflush(stdin);
-                    gets(cadenaAux);
+                    gets(nombreAux);
                 }
-                strcpy(nuevoDueno.nombreYApellido, cadenaAux);
+                nombreAux[0] = toupper(nombreAux[0]);
+
+                printf("Ingrese apellido: ");
+                fflush(stdin);
+                gets(aux);
+
+                while (validarSoloLetras(aux) == 0)
+                {
+                    printf("Ingrese solo letras: ");
+                    fflush(stdin);
+                    gets(aux);
+                }
+                aux[0] = toupper(aux[0]);
+
+                strcat(nombreAux, " ");
+                strcat(nombreAux, aux);
+                strcpy(nuevoDueno.nombreYApellido, nombreAux);
 
                 printf("Ingrese direccion: ");
                 fflush(stdin);
@@ -181,15 +198,15 @@ void altaDueno(eDueno duenos[], int tam, int* bandera)
 
                 printf("Ingrese numero de tarjeta de credito: ");
                 fflush(stdin);
-                gets(cadenaAux);
+                gets(aux);
 
-                while (validarNumero(cadenaAux) == 0)
+                while (validarNumero(aux) == 0)
                 {
                     printf("Ingrese solo numeros");
                     fflush(stdin);
-                    gets(cadenaAux);
+                    gets(aux);
                 }
-                nuevoDueno.numeroDeTarjetaDeCredito = atoi(cadenaAux);
+                nuevoDueno.numeroDeTarjetaDeCredito = atoi(aux);
 
                 nuevoDueno.estado = 1;
 
