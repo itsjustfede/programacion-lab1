@@ -154,49 +154,49 @@ void altaDueno(eDueno duenos[], int tam, int* bandera)
 
             esta = buscarDueno(id, duenos, tam);
 
-        if (esta != -1)
-        {
-            printf("Ese dueno ya esta registrado");
-        }
-        else
-        {
-            nuevoDueno.idDueno = id;
-
-            printf("Ingrese nombre y apellido: ");
-            fflush(stdin);
-            gets(cadenaAux);
-
-            while (validarSoloLetras(cadenaAux) == 0)
+            if (esta != -1)
             {
-                printf("Ingrese solo letras: ");
+                printf("Ese dueno ya esta registrado");
+            }
+            else
+            {
+                nuevoDueno.idDueno = id;
+
+                printf("Ingrese nombre y apellido: ");
                 fflush(stdin);
                 gets(cadenaAux);
-            }
-            strcpy(nuevoDueno.nombreYApellido, cadenaAux);
 
-            printf("Ingrese direccion: ");
-            fflush(stdin);
-            gets(nuevoDueno.direccion);
+                while (validarSoloLetras(cadenaAux) == 0)
+                {
+                    printf("Ingrese solo letras: ");
+                    fflush(stdin);
+                    gets(cadenaAux);
+                }
+                strcpy(nuevoDueno.nombreYApellido, cadenaAux);
+
+                printf("Ingrese direccion: ");
+                fflush(stdin);
+                gets(nuevoDueno.direccion);
 
 
-            printf("Ingrese numero de tarjeta de credito: ");
-            fflush(stdin);
-            gets(cadenaAux);
-
-            while (validarNumero(cadenaAux) == 0)
-            {
-                printf("Ingrese solo numeros");
+                printf("Ingrese numero de tarjeta de credito: ");
                 fflush(stdin);
                 gets(cadenaAux);
+
+                while (validarNumero(cadenaAux) == 0)
+                {
+                    printf("Ingrese solo numeros");
+                    fflush(stdin);
+                    gets(cadenaAux);
+                }
+                nuevoDueno.numeroDeTarjetaDeCredito = atoi(cadenaAux);
+
+                nuevoDueno.estado = 1;
+
+                duenos[lugar] = nuevoDueno;
+
+                *bandera = 0;
             }
-            nuevoDueno.numeroDeTarjetaDeCredito = atoi(cadenaAux);
-
-            nuevoDueno.estado = 1;
-
-            duenos[lugar] = nuevoDueno;
-
-            *bandera = 0;
-        }
         }
 
 
@@ -333,9 +333,9 @@ void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int*
             fflush(stdin);
             gets(aux);
 
-            while (validarNumero(aux) == 0)
+            while (validarNumero(aux) == 0 || buscarDueno(atoi(aux), duenos, tamDuenos) == -1)
             {
-                printf("Ingrese solo numeros: ");
+                printf("El ID no es correcto o no existe: ");
                 fflush(stdin);
                 gets(aux);
             }
@@ -626,65 +626,60 @@ void egresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int a
         else
         {
 
-        if (cars[esta].dueno == duenos[estaDueno].idDueno)
-        {
-
-        printf("\nDesea retirar el auto con patente \"%s\" del dueno \"%s\"? S/N \n",cars[esta].patente ,duenos[estaDueno].nombreYApellido);
-        fflush(stdin);
-        scanf("%c", &respuesta);
-
-        respuesta = tolower(respuesta);
-
-        while(validar)
-        {
-            if (respuesta == 's')
+            if (cars[esta].dueno == duenos[estaDueno].idDueno)
             {
-                validar = 0;
-                printf("Ingrese la hora de salida (sabiendo que ingreso a la(s) %dhs): ", cars[esta].horarioDeEntrada);
+
+                printf("\nDesea retirar el auto con patente \"%s\" del dueno \"%s\"? S/N \n",cars[esta].patente,duenos[estaDueno].nombreYApellido);
                 fflush(stdin);
-                gets(aux);
+                scanf("%c", &respuesta);
 
-                while(validarNumero(aux) == 0 || atoi(aux) < cars[esta].horarioDeEntrada || atoi(aux) > 24)
+                respuesta = tolower(respuesta);
+
+                while(validar)
                 {
-                    printf("El auto ingreso a la(s) %dhs): ", cars[esta].horarioDeEntrada);
-                    printf("y no puede permanecer de un dia para el otro, ingrese una hora correta: ");
+                    if (respuesta == 's')
+                    {
+                        validar = 0;
+                        printf("Ingrese la hora de salida (sabiendo que ingreso a la(s) %dhs): ", cars[esta].horarioDeEntrada);
+                        fflush(stdin);
+                        gets(aux);
+
+                        while(validarNumero(aux) == 0 || atoi(aux) < cars[esta].horarioDeEntrada || atoi(aux) > 24)
+                        {
+                            printf("El auto ingreso a la(s) %dhs): ", cars[esta].horarioDeEntrada);
+                            printf("y no puede permanecer de un dia para el otro, ingrese una hora correta: ");
+                            fflush(stdin);
+                            gets(aux);
+                        }
+
+                        horaDeSalida = atoi(aux);
+
+                        valorDeEstadia = calcularRecaudacionDeAuto(cars[esta].horarioDeEntrada, horaDeSalida, cars[esta].marca, arrayDeRecaudacion);
+
+                        generarTicket(cars[esta], duenos[estaDueno], valorDeEstadia, cars[esta].marca);
+
+                        cars[esta].estado = 0;
+
+                        break;
+
+                    }
+                    else if (respuesta == 'n')
+                    {
+                        validar = 0;
+                        printf("Accion cancelada");
+                        break;
+                    }
+                    printf("Ingrese S/N");
                     fflush(stdin);
-                    gets(aux);
+                    scanf("%c", &respuesta);
+                    respuesta = tolower(respuesta);
                 }
-
-                horaDeSalida = atoi(aux);
-
-                valorDeEstadia = calcularRecaudacionDeAuto(cars[esta].horarioDeEntrada, horaDeSalida, cars[esta].marca, arrayDeRecaudacion);
-
-                generarTicket(cars[esta], duenos[estaDueno], valorDeEstadia, cars[esta].marca);
-
-                cars[esta].estado = 0;
-
-                break;
-
             }
-            else if (respuesta == 'n')
+            else
             {
-                validar = 0;
-                printf("Accion cancelada");
-                break;
+                printf("Los datos no coinciden.");
             }
-            printf("Ingrese S/N");
-            fflush(stdin);
-            scanf("%c", &respuesta);
-            respuesta = tolower(respuesta);
         }
-        }
-        else
-        {
-            printf("Los datos no coinciden.");
-        }
-
-
-
-        }
-
-
     }
 }
 
