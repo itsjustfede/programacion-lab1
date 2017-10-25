@@ -7,7 +7,7 @@ typedef struct
     int idDueno;
     char nombreYApellido[70];
     char direccion[30];
-    int numeroDeTarjetaDeCredito;
+    char numeroDeTarjetaDeCredito[17];
     int estado;
 }eDueno;
 

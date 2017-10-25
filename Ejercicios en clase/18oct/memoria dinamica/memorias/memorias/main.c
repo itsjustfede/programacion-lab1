@@ -29,12 +29,13 @@ int main()
         scanf("%d",&((pArrayPersona+logitudPersonas-1)->edad));
         printf("\nSi desea cargar otra persona ingrese (1): ");
         scanf("%d",&seguirCargando);
+
         if(seguirCargando == 1)
         {
-         logitudPersonas++; //Incremento el contador de personas
-// Calculamos el nuevo tamaño del array
+            logitudPersonas++; //Incremento el contador de personas
+            // Calculamos el nuevo tamaño del array
             auxNuevaLogitud = sizeof(struct persona) * logitudPersonas;
-// Redimencionamos la lista
+            // Redimencionamos la lista
             pAuxPersona = realloc( pArrayPersona, auxNuevaLogitud);
             if (pAuxPersona == NULL)
             {

@@ -39,11 +39,11 @@ int menu()
 
 }
 
-/** \brief
+/** \brief incializa el vector el 0
  *
- * \param
- * \param
- * \return
+ * \param duenos[] array a ser recorrido
+ * \param tam tamaño del array
+ * \return void
  *
  */
 void inicializarVectorDuenos(eDueno duenos[], int tam)
@@ -57,8 +57,8 @@ void inicializarVectorDuenos(eDueno duenos[], int tam)
 
 /** \brief
  *
- * \param cars[] eCars
- * \param tam int
+ * \param cars[] incializa el vector en 0
+ * \param tam tamaño del array
  * \return void
  *
  */
@@ -71,11 +71,11 @@ void inicializarVectorCars(eCars cars[], int tam)
     }
 }
 
-/** \brief
+/** \brief devuelve el primero estado 0
  *
- * \param duenos[] eDueno
- * \param tam int
- * \return int
+ * \param duenos[] array que se recorre
+ * \param tam tamaño del array
+ * \return devuelve el indice del lugar
  *
  */
 int buscarDuenoLibre(eDueno duenos[], int tam)
@@ -94,12 +94,12 @@ int buscarDuenoLibre(eDueno duenos[], int tam)
     return indice;
 }
 
-/** \brief
+/** \brief busca el dueño en el array por id
  *
- * \param id int
- * \param dueno[] eDueno
- * \param tam int
- * \return int
+ * \param id id del deño a ser buscado
+ * \param dueno[] array de dueños
+ * \param tam tamaño del array
+ * \return int devuelve el indice del dueño, -1 si no existe
  *
  */
 int buscarDueno(int id, eDueno dueno[], int tam)
@@ -118,11 +118,11 @@ int buscarDueno(int id, eDueno dueno[], int tam)
     return indice;
 }
 
-/** \brief
+/** \brief agrega un dueno al array
  *
- * \param duenos[] eDueno
- * \param tam int
- * \param bandera int*
+ * \param duenos[] array donde se ingresara el dueno
+ * \param tam tamaño del array
+ * \param bandera bandera para validacion del switch de main
  * \return void
  *
  */
@@ -195,24 +195,30 @@ void altaDueno(eDueno duenos[], int tam, int* bandera)
                 fflush(stdin);
                 gets(nuevoDueno.direccion);
 
+                while (strlen(nuevoDueno.direccion) > 30)
+                {
+                    printf("La dirreccion no debe contener mas de 30 caracteres: ");
+                    fflush(stdin);
+                    gets(nuevoDueno.direccion);
+                }
 
                 printf("Ingrese numero de tarjeta de credito: ");
                 fflush(stdin);
                 gets(aux);
 
-                while (validarNumero(aux) == 0)
+                while (validarNumero(aux) == 0 || strlen(aux) > 16)
                 {
-                    printf("Ingrese solo numeros");
+                    printf("Ingrese solo un maximo de 16 numeros: ");
                     fflush(stdin);
                     gets(aux);
                 }
-                nuevoDueno.numeroDeTarjetaDeCredito = atoi(aux);
+                strcpy(nuevoDueno.numeroDeTarjetaDeCredito, aux);
 
                 nuevoDueno.estado = 1;
 
                 duenos[lugar] = nuevoDueno;
 
-                *bandera = 0;
+                *bandera = 1;
             }
         }
 
@@ -220,10 +226,10 @@ void altaDueno(eDueno duenos[], int tam, int* bandera)
     }
 }
 
-/** \brief
+/** \brief imprime los datos de todos los duenos por pantalla
  *
- * \param duenos[] eDueno
- * \param tam int
+ * \param duenos[] array de duenos a ser mostrados
+ * \param tam tamaño del array
  * \return void
  *
  */
@@ -238,11 +244,11 @@ void mostrarDuenos(eDueno duenos[], int tam)
     }
 }
 
-/** \brief
+/** \brief busca el primero indice 0 del array de autos
  *
- * \param cars[] eCars
- * \param tam int
- * \return int
+ * \param cars[] array de autos
+ * \param tam tamaño del array
+ * \return int devuelve el indice del primero 0, devuele -1 si no existe
  *
  */
 int buscarAutomovilLibre(eCars cars[], int tam)
@@ -261,12 +267,12 @@ int buscarAutomovilLibre(eCars cars[], int tam)
     return indice;
 }
 
-/** \brief
+/** \brief buscan un auto a partir de la patente
  *
- * \param patente[] char
- * \param cars[] eCars
- * \param tam int
- * \return int
+ * \param patente[] patente del auto a ser modificado
+ * \param cars[] array de autos donde se buscara el auto
+ * \param tam tamaño del array
+ * \return int devuelve el indice si lo encuentra, -1 si no existe
  *
  */
 int buscarAtomovil(char patente[], eCars cars[], int tam)
@@ -285,13 +291,13 @@ int buscarAtomovil(char patente[], eCars cars[], int tam)
     return indice;
 }
 
-/** \brief
+/** \brief ingresa un auto en el estacionamiento si se puede
  *
- * \param duenos[] eDueno
- * \param tamDuenos int
- * \param cars[] eCars
- * \param tam int
- * \param bandera int*
+ * \param duenos[] array de duenos para vincular con el auto
+ * \param tamDuenos tamaño del array de duenos
+ * \param cars[] array de autos para registrar el auto
+ * \param tam tamaño del array de autos
+ * \param bandera bandera para la validacion del switch en main
  * \return void
  *
  */
@@ -375,17 +381,17 @@ void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int*
 
             cars[lugar] = nuevoAutomovil;
 
-            *bandera = 0;
+            *bandera = 1;
         }
     }
 }
 
-/** \brief
+/** \brief imprime por pantalla todos los autos estacionados con los datos de sus duenos
  *
- * \param duenos[] eDueno
- * \param tamDuenos int
- * \param cars[] eCars
- * \param tam int
+ * \param duenos[] array de  losd duenos para relacionar con los autos
+ * \param tamDuenos tamaño del array de duenos
+ * \param cars[] array de autos para imprimirlos
+ * \param tam tamaño del array de autos
  * \return void
  *
  */
@@ -401,11 +407,11 @@ void mostrarAutomovilesEstacionados(eDueno duenos[], int tamDuenos, eCars cars[]
     }
 }
 
-/** \brief
+/** \brief imprime un auto con los datos de su dueno
  *
- * \param duenos[] eDueno
- * \param tamDuenos int
- * \param cars eCars
+ * \param duenos[] array de duenos para relacionarlo con el auto
+ * \param tamDuenos tamano de array de auto
+ * \param cars eCars estructura del auto
  * \return void
  *
  */
@@ -440,17 +446,17 @@ void mostrarAutomovilEstacionado(eDueno duenos[], int tamDuenos, eCars cars)
         {
             if (duenos[i].estado == 1 && duenos[i].idDueno == cars.dueno)
             {
-                printf("%s -- %s -- %d\n", duenos[i].nombreYApellido, duenos[i].direccion, duenos[i].numeroDeTarjetaDeCredito);
+                printf("%s -- %s -- %s\n", duenos[i].nombreYApellido, duenos[i].direccion, duenos[i].numeroDeTarjetaDeCredito);
             }
         }
     }
 
 }
 
-/** \brief
+/** \brief ordena el array de autos por hora de entrada y por patente
  *
- * \param cars[] eCars
- * \param tam int
+ * \param cars[] array de los autos
+ * \param tam tamaño del array
  * \return void
  *
  */
@@ -481,9 +487,9 @@ void ordenarAutomoviles(eCars cars[], int tam)
     }
 }
 
-/** \brief
+/** \brief hardcodea 5 autos
  *
- * \param cars[] eCars
+ * \param cars[] array a ser hardcodeado
  * \return void
  *
  */
@@ -507,12 +513,12 @@ void hardcodearCars(eCars cars[])
 
 }
 
-/** \brief
+/** \brief muestra los duenos que poseen un auto de marca audi
  *
- * \param duenos[] eDueno
- * \param tamDuenos int
- * \param cars[] eCars
- * \param tamCars int
+ * \param duenos[] array de los duenos
+ * \param tamDuenos tamano de los duenos
+ * \param cars[] array de los autos donde se buscara
+ * \param tamCars tamano del array de autos
  * \return void
  *
  */
@@ -530,7 +536,7 @@ void mostrarPropietariosDeAudis(eDueno duenos[], int tamDuenos, eCars cars[], in
             {
                 if (duenos[j].estado == 1 && duenos[j].idDueno == cars[i].dueno)
                 {
-                    printf("%s -- %s -- %d\n", duenos[j].nombreYApellido, duenos[j].direccion, duenos[j].numeroDeTarjetaDeCredito);
+                    printf("%s -- %s -- %s\n", duenos[j].nombreYApellido, duenos[j].direccion, duenos[j].numeroDeTarjetaDeCredito);
                     bandera = 0;
                 }
             }
@@ -544,10 +550,10 @@ void mostrarPropietariosDeAudis(eDueno duenos[], int tamDuenos, eCars cars[], in
 
 }
 
-/** \brief
+/** \brief modifica el numero de tarjeta de credito de un dueno
  *
- * \param duenos[] eDueno
- * \param tam int
+ * \param duenos[] array donde se buscara al dueno
+ * \param tam tamano del array
  * \return void
  *
  */
@@ -555,6 +561,7 @@ void modificarDueno(eDueno duenos[], int tam)
 {
     int i, id, bandera;
     char respuesta;
+    char aux[50];
 
     printf("Ingrese el ID: ");
     scanf("%d", &id);
@@ -573,10 +580,20 @@ void modificarDueno(eDueno duenos[], int tam)
 
             if (respuesta == 's')
             {
-                printf("Numero actual de tarjeta de credito: %d\n", duenos[i].numeroDeTarjetaDeCredito);
+                printf("Numero actual de tarjeta de credito: %s\n", duenos[i].numeroDeTarjetaDeCredito);
                 printf("Ingrese el nuevo numero de tarjeta de credito: ");
-                scanf("%d", &duenos[i].numeroDeTarjetaDeCredito);
+                fflush(stdin);
+                gets(aux);
+
+                while (validarNumero(aux) == 0 || strlen(aux) > 16)
+                {
+                    printf("Ingrese solo un maximo de 16 numeros: ");
+                    fflush(stdin);
+                    gets(aux);
+                }
+
                 printf("Modificacion exitosa");
+                strcpy(duenos[i].numeroDeTarjetaDeCredito, aux);
             }
             else
             {
@@ -592,13 +609,13 @@ void modificarDueno(eDueno duenos[], int tam)
         printf("El ID no existe");
 }
 
-/** \brief
+/** \brief retira un automovil del estacionamiento
  *
- * \param duenos[] eDueno
- * \param tamDuenos int
- * \param cars[] eCars
+ * \param duenos[] array de duenos para verificar
+ * \param tamDuenos tamano del array de duenos
+ * \param cars[] array de autos
  * \param tam int
- * \param arrayDeRecaudacion[] int
+ * \param arrayDeRecaudacion[] el array donde se guardara el valor de estadia
  * \return void
  *
  */
@@ -700,13 +717,13 @@ void egresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int a
     }
 }
 
-/** \brief
+/** \brief calcula el valor de la estacio segun hora de salida y marca
  *
- * \param horaDeEntrada int
- * \param horaDeSalida int
- * \param marca int
- * \param arrayDeRecaudacion[] int
- * \return int
+ * \param horaDeEntrada la hora que ingreso el auto
+ * \param horaDeSalida la hora que salio el auto
+ * \param marca marca de auto
+ * \param arrayDeRecaudacion[] array donde se guardara el valor de la estadia
+ * \return int devuelve la recaudacion
  *
  */
 int calcularRecaudacionDeAuto(int horaDeEntrada, int horaDeSalida, int marca, int arrayDeRecaudacion[])
@@ -735,12 +752,12 @@ int calcularRecaudacionDeAuto(int horaDeEntrada, int horaDeSalida, int marca, in
     return costo;
 }
 
-/** \brief
+/** \brief genera el ticket donde muestra el valor de la estadia de un auto
  *
- * \param car eCars
- * \param dueno eDueno
- * \param valorDeEstadia int
- * \param marca int
+ * \param car estructura del auto para mostrar datos
+ * \param dueno estructura del dueno para mostrar datos
+ * \param valorDeEstadia el valor de su estadia
+ * \param marca marca del auto para mostrar
  * \return void
  *
  */
@@ -765,14 +782,14 @@ void generarTicket(eCars car, eDueno dueno, int valorDeEstadia, int marca)
     printf("La marca: %s\n", marquita);
     printf("Valor de la estadia: $%d", valorDeEstadia);
 
-    printf("\n------------------------------------------------------------\n");
+    printf("\n-------------------------------------------------------------------------\n");
 }
 
-/** \brief
+/** \brief se encarga de guardar el valor de estadia segun marca en el array de recaudacion
  *
- * \param recaudacion int
- * \param marca int
- * \param arrayDeRecaudacion[] int
+ * \param recaudacion el valor de la estadia de un auto
+ * \param marca la marca del auto
+ * \param arrayDeRecaudacion[] array donde se guardara el valor de la recaudacion
  * \return void
  *
  */
@@ -798,22 +815,22 @@ void recaudar(int recaudacion, int marca, int arrayDeRecaudacion[])
     arrayDeRecaudacion[TOTAL] = arrayDeRecaudacion[TOTAL] + recaudacion;
 }
 
-/** \brief
+/** \brief muestra las recaudaciones del array segun marca y totales
  *
- * \param arrayDeRecaudacion[] int
+ * \param arrayDeRecaudacion[] array donde se almacena todos los valores
  * \return void
  *
  */
 void mostrarRecaudacion(int arrayDeRecaudacion[])
 {
-    printf("\n------------------------------------------------------------\n");
+    printf("\n-------------------------------------------------------------------------\n");
     printf("Recaudacion Total: %d\n\n", arrayDeRecaudacion[TOTAL]);
     printf("Recaudacion por marca\n\n");
     printf("Alfa Romeo: %d\n", arrayDeRecaudacion[ALPHA_ROMEO]);
     printf("Ferrari: %d\n", arrayDeRecaudacion[FERRARI]);
     printf("Audi: %d\n", arrayDeRecaudacion[AUDI]);
     printf("Otro: %d", arrayDeRecaudacion[OTRO]);
-    printf("\n------------------------------------------------------------\n");
+    printf("\n-------------------------------------------------------------------------\n");
 }
 
 

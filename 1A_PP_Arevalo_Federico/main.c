@@ -3,8 +3,8 @@
 #include <conio.h>
 #include "Estacionamiento.h"
 
-#define DUENOS 10
-#define CARS 10
+#define DUENOS 20
+#define CARS 20
 
 #define ALPHA_ROMEO 1
 #define FERRARI 2
@@ -25,12 +25,12 @@ int main()
 
     int recaudacion[] = {0, 0, 0, 0, 0};
 
-    eDueno duenos[DUENOS];//= {{1, "Marcos Meriggi", "Calle 13 N113", 11111, 1}, {2, "Federico Arevalo", "Calle 177 N1938", 11112, 1}, {3, "Juan Perez", "Calle 223 N4000 Piso 3", 11113, 1}, {4, "Susana Horia", "Calle 4000 N312", 11114, 1}, {5, "Esteban Dido", "Calle 933 N1024", 11115, 1}};
+    eDueno duenos[DUENOS]= {{1, "Marcos Meriggi", "Calle 13 N113", "11111", 1}, {2, "Federico Arevalo", "Calle 177 N1938", "11112", 1}, {3, "Juan Perez", "Calle 223 N4000 Piso 3", "11113", 1}, {4, "Susana Horia", "Calle 4000 N312", "11114", 1}, {5, "Esteban Dido", "Calle 933 N1024", "11115", 1}};
     eCars cars[CARS];
 
-    inicializarVectorDuenos(duenos, DUENOS);
+    //inicializarVectorDuenos(duenos, DUENOS);
     inicializarVectorCars(cars, CARS);
-    //hardcodearCars(cars);
+    hardcodearCars(cars);
 
 
     do
@@ -46,7 +46,7 @@ int main()
 
         case 2:
             system("cls");
-            if (banderaDuenos)
+            if (!(banderaDuenos))
             {
                 printf("Se debe realizar el alta al menos un dueno");
             }
@@ -58,7 +58,7 @@ int main()
             break;
         case 3:
             system("cls");
-            if (banderaDuenos)
+            if (!(banderaDuenos))
             {
                 printf("Se debe realizar el alta al menos un dueno");
             }
@@ -71,7 +71,7 @@ int main()
 
         case 4:
             system("cls");
-            if (banderaCars)
+            if (!(banderaCars))
             {
                 printf("Se debe realizar el alta al menos un auto");
             }
@@ -84,7 +84,7 @@ int main()
 
         case 5:
             system("cls");
-            if (banderaCars)
+            if (!(banderaCars))
             {
                 printf("Se debe realizar el alta al menos un auto");
             }
@@ -92,9 +92,9 @@ int main()
             {
                 ordenarAutomoviles(cars, CARS);
                 mostrarAutomovilesEstacionados(duenos, DUENOS, cars, CARS);
-                printf("\n------------------------------------------------------------\n");
+                printf("\n-------------------------------------------------------------------------\n");
                 mostrarPropietariosDeAudis(duenos, DUENOS, cars, CARS);
-                printf("\n------------------------------------------------------------\n");
+                printf("\n-------------------------------------------------------------------------\n");
                 mostrarRecaudacion(recaudacion);
 
             }

@@ -23,12 +23,12 @@
 	<conio.h>
 	"Estacionamiento.h"
 
-1508871788 f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.h
+1508931606 f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 
-1508897192 source:f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.c
+1508931545 source:f:\usuarios\alumno\escritorio\fede\1a_pp_arevalo_federico\1a_pp_arevalo_federico\estacionamiento.c
 	<stdio.h>
 	<stdlib.h>
 	<conio.h>
@@ -49,4 +49,36 @@
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
+
+1508936239 source:c:\users\alumno\desktop\1a_pp_arevalo_federico\estacionamiento.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	<ctype.h>
+	"Estacionamiento.h"
+	"validaciones.h"
+
+1508933464 c:\users\alumno\desktop\1a_pp_arevalo_federico\estacionamiento.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1508932548 c:\users\alumno\desktop\1a_pp_arevalo_federico\validaciones.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1508936206 source:c:\users\alumno\desktop\1a_pp_arevalo_federico\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"Estacionamiento.h"
+
+1508934331 source:c:\users\alumno\desktop\1a_pp_arevalo_federico\validaciones.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"validaciones.h"
 

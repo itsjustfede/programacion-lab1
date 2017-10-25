@@ -2,14 +2,13 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <string.h>
-#include <ctype.h>
 
 #include "validaciones.h"
 
-/** \brief
+/** \brief valida que lo que se ingreso sea numero
  *
- * \param numero[] char
- * \return int
+ * \param numero[] cadena donde se guardan los numeros
+ * \return int devuelve 1 si es numero, 0 si no lo es
  *
  */
 int validarNumero(char numero[])
@@ -29,31 +28,19 @@ int validarNumero(char numero[])
    return devuelve;
 }
 
-int pedirStringLetras(char mensaje[],char input[])
-{
-    char aux[256];
-    pedirString(mensaje,aux);
-    if(validarSoloLetras(aux))
-    {
-        strcpy(input,aux);
-        return 1;
-    }
-    return 0;
-}
-
-void pedirString(char mensaje[],char input[])
-{
-    printf("%s",mensaje);
-    scanf ("%s", input);
-}
-
-int validarSoloLetras (char str[])
+/** \brief valida que lo que se ingreso son solo letras
+ *
+ * \param letras cadena donde se guardan las letras
+ * \return devuelve 1 si son letras, 0 si no lo son
+ *
+ */
+int validarSoloLetras (char letras[])
 {
    int i = 0, devuelve = 1;
 
-   while(str[i] != '\0')
+   while(letras[i] != '\0')
    {
-       if((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
+       if((letras[i] < 'a' || letras[i] > 'z') && (letras[i] < 'A' || letras[i] > 'Z'))
        {
            devuelve = 0;
            break;
