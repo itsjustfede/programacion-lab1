@@ -58,7 +58,14 @@ int main()
             break;
         case 3:
             system("cls");
-            ingresoAutmovil(duenos, DUENOS, cars, CARS, pBanderaCars);
+            if (banderaDuenos)
+            {
+                printf("Se debe realizar el alta al menos un dueno");
+            }
+            else
+            {
+                ingresoAutmovil(duenos, DUENOS, cars, CARS, pBanderaCars);
+            }
             getch();
             break;
 

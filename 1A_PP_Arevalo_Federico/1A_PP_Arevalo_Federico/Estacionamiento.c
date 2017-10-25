@@ -4,6 +4,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "Estacionamiento.h"
+#include "validaciones.h"
 
 #define TOTAL 0
 
@@ -14,7 +15,7 @@
 
 int menu()
 {
-    int opcion;
+    char opcion[10];
     system("cls");
     printf("\n***ESTACIONAMIENTO***\n\n\n");
     printf("1- Alta Dueno\n");
@@ -24,12 +25,27 @@ int menu()
     printf("5- Informes\n");
     printf("6- Salir\n");
     printf("\n\nIngrese opcion: ");
-    scanf("%d", &opcion);
+    fflush(stdin);
+    gets(opcion);
 
-    return opcion;
+    while(validarNumero(opcion) == 0 || atoi(opcion) < 1 || atoi(opcion) > 6)
+    {
+        printf("Opcion incorrecta, debe ingresar valores del 1 al 6: ");
+        fflush(stdin);
+        gets(opcion);
+    }
+
+    return atoi(opcion);
 
 }
 
+/** \brief
+ *
+ * \param
+ * \param
+ * \return
+ *
+ */
 void inicializarVectorDuenos(eDueno duenos[], int tam)
 {
     int i;
@@ -39,6 +55,13 @@ void inicializarVectorDuenos(eDueno duenos[], int tam)
     }
 }
 
+/** \brief
+ *
+ * \param cars[] eCars
+ * \param tam int
+ * \return void
+ *
+ */
 void inicializarVectorCars(eCars cars[], int tam)
 {
     int i;
@@ -48,6 +71,13 @@ void inicializarVectorCars(eCars cars[], int tam)
     }
 }
 
+/** \brief
+ *
+ * \param duenos[] eDueno
+ * \param tam int
+ * \return int
+ *
+ */
 int buscarDuenoLibre(eDueno duenos[], int tam)
 {
     int i;
@@ -64,6 +94,14 @@ int buscarDuenoLibre(eDueno duenos[], int tam)
     return indice;
 }
 
+/** \brief
+ *
+ * \param id int
+ * \param dueno[] eDueno
+ * \param tam int
+ * \return int
+ *
+ */
 int buscarDueno(int id, eDueno dueno[], int tam)
 {
     int i;
@@ -80,10 +118,19 @@ int buscarDueno(int id, eDueno dueno[], int tam)
     return indice;
 }
 
+/** \brief
+ *
+ * \param duenos[] eDueno
+ * \param tam int
+ * \param bandera int*
+ * \return void
+ *
+ */
 void altaDueno(eDueno duenos[], int tam, int* bandera)
 {
     eDueno nuevoDueno;
     int esta, id, lugar;
+    char cadenaAux[100];
 
     lugar = buscarDuenoLibre(duenos, tam);
 
@@ -94,9 +141,18 @@ void altaDueno(eDueno duenos[], int tam, int* bandera)
     else
     {
         printf("\nIngrese el ID: ");
-        scanf("%d", &id);
+        fflush(stdin);
+        gets(cadenaAux);
 
-        esta = buscarDueno(id, duenos, tam);
+        if (validarNumero(cadenaAux) == 0)
+        {
+            printf("Debe ingresar solo numeros");
+        }
+        else
+        {
+            id = atoi(cadenaAux);
+
+            esta = buscarDueno(id, duenos, tam);
 
         if (esta != -1)
         {
@@ -108,14 +164,32 @@ void altaDueno(eDueno duenos[], int tam, int* bandera)
 
             printf("Ingrese nombre y apellido: ");
             fflush(stdin);
-            gets(nuevoDueno.nombreYApellido);
+            gets(cadenaAux);
+
+            while (validarSoloLetras(cadenaAux) == 0)
+            {
+                printf("Ingrese solo letras: ");
+                fflush(stdin);
+                gets(cadenaAux);
+            }
+            strcpy(nuevoDueno.nombreYApellido, cadenaAux);
 
             printf("Ingrese direccion: ");
             fflush(stdin);
             gets(nuevoDueno.direccion);
 
+
             printf("Ingrese numero de tarjeta de credito: ");
-            scanf("%d", &nuevoDueno.numeroDeTarjetaDeCredito);
+            fflush(stdin);
+            gets(cadenaAux);
+
+            while (validarNumero(cadenaAux) == 0)
+            {
+                printf("Ingrese solo numeros");
+                fflush(stdin);
+                gets(cadenaAux);
+            }
+            nuevoDueno.numeroDeTarjetaDeCredito = atoi(cadenaAux);
 
             nuevoDueno.estado = 1;
 
@@ -123,9 +197,19 @@ void altaDueno(eDueno duenos[], int tam, int* bandera)
 
             *bandera = 0;
         }
+        }
+
+
     }
 }
 
+/** \brief
+ *
+ * \param duenos[] eDueno
+ * \param tam int
+ * \return void
+ *
+ */
 void mostrarDuenos(eDueno duenos[], int tam)
 {
     int i;
@@ -137,6 +221,13 @@ void mostrarDuenos(eDueno duenos[], int tam)
     }
 }
 
+/** \brief
+ *
+ * \param cars[] eCars
+ * \param tam int
+ * \return int
+ *
+ */
 int buscarAutomovilLibre(eCars cars[], int tam)
 {
     int i;
@@ -153,6 +244,14 @@ int buscarAutomovilLibre(eCars cars[], int tam)
     return indice;
 }
 
+/** \brief
+ *
+ * \param patente[] char
+ * \param cars[] eCars
+ * \param tam int
+ * \return int
+ *
+ */
 int buscarAtomovil(char patente[], eCars cars[], int tam)
 {
     int i;
@@ -169,11 +268,22 @@ int buscarAtomovil(char patente[], eCars cars[], int tam)
     return indice;
 }
 
+/** \brief
+ *
+ * \param duenos[] eDueno
+ * \param tamDuenos int
+ * \param cars[] eCars
+ * \param tam int
+ * \param bandera int*
+ * \return void
+ *
+ */
 void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int* bandera)
 {
     eCars nuevoAutomovil;
     int esta, lugar;
     char patente[30];
+    char aux[50];
 
     lugar = buscarAutomovilLibre(cars, tam);
 
@@ -187,6 +297,13 @@ void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int*
         fflush(stdin);
         gets(patente);
 
+        while (strlen(patente) > 6)
+        {
+            printf("La patente debe estar conformada por 6 caracteres alfanuemricos. \nReingrese: ");
+            fflush(stdin);
+            gets(patente);
+        }
+
         esta = buscarAtomovil(patente, cars, tam);
 
         if (esta != -1)
@@ -197,15 +314,45 @@ void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int*
         {
             strcpy(nuevoAutomovil.patente, patente);
 
+            printf("\n");
             printf("Ingrese marca \n 1- Alpha Romeo \n 2- Ferrari \n 3- Audi \n 4- Otro \n\n");
-            scanf("%d", &nuevoAutomovil.marca);
+            fflush(stdin);
+            gets(aux);
 
+            while (validarNumero(aux) == 0 || atoi(aux) < 1 || atoi(aux) > 4)
+            {
+                printf("Debe ingresar los valores correspondientes a las marcas: ");
+                fflush(stdin);
+                gets(aux);
+            }
+            nuevoAutomovil.marca = atoi(aux);
+
+            printf("\n");
             printf("Ingrese dueno por ID: \n");
             mostrarDuenos(duenos, tamDuenos);
-            scanf("%d", &nuevoAutomovil.dueno);
+            fflush(stdin);
+            gets(aux);
 
+            while (validarNumero(aux) == 0)
+            {
+                printf("Ingrese solo numeros: ");
+                fflush(stdin);
+                gets(aux);
+            }
+            nuevoAutomovil.dueno = atoi(aux);
+
+            printf("\n");
             printf("Ingrese horario de entrada: ");
-            scanf("%d", &nuevoAutomovil.horarioDeEntrada);
+            fflush(stdin);
+            gets(aux);
+
+            while (validarNumero(aux) == 0 || atoi(aux) < 1 || atoi(aux) > 24)
+            {
+                printf("Ingrese una hora correcta (fomato de 24hs): ");
+                fflush(stdin);
+                gets(aux);
+            }
+            nuevoAutomovil.horarioDeEntrada = atoi(aux);
 
             nuevoAutomovil.estado = 1;
 
@@ -216,6 +363,15 @@ void ingresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int*
     }
 }
 
+/** \brief
+ *
+ * \param duenos[] eDueno
+ * \param tamDuenos int
+ * \param cars[] eCars
+ * \param tam int
+ * \return void
+ *
+ */
 void mostrarAutomovilesEstacionados(eDueno duenos[], int tamDuenos, eCars cars[], int tam)
 {
     int i;
@@ -228,6 +384,14 @@ void mostrarAutomovilesEstacionados(eDueno duenos[], int tamDuenos, eCars cars[]
     }
 }
 
+/** \brief
+ *
+ * \param duenos[] eDueno
+ * \param tamDuenos int
+ * \param cars eCars
+ * \return void
+ *
+ */
 void mostrarAutomovilEstacionado(eDueno duenos[], int tamDuenos, eCars cars)
 {
     int i;
@@ -252,7 +416,7 @@ void mostrarAutomovilEstacionado(eDueno duenos[], int tamDuenos, eCars cars)
 
     if (cars.estado == 1)
     {
-        printf("%s -- %d -- %s -- ", cars.patente, cars.horarioDeEntrada, marca);
+        printf("%s -- %dhs -- %s -- ", cars.patente, cars.horarioDeEntrada, marca);
         //recorro dueños
         for (i = 0; i < tamDuenos; i++)
 
@@ -266,6 +430,13 @@ void mostrarAutomovilEstacionado(eDueno duenos[], int tamDuenos, eCars cars)
 
 }
 
+/** \brief
+ *
+ * \param cars[] eCars
+ * \param tam int
+ * \return void
+ *
+ */
 void ordenarAutomoviles(eCars cars[], int tam)
 {
     int i, j;
@@ -293,6 +464,12 @@ void ordenarAutomoviles(eCars cars[], int tam)
     }
 }
 
+/** \brief
+ *
+ * \param cars[] eCars
+ * \return void
+ *
+ */
 void hardcodearCars(eCars cars[])
 {
     char patente[][10] =  {"ABC123", "DFG456", "HIJ674", "JRD842", "KLM654"};
@@ -313,6 +490,15 @@ void hardcodearCars(eCars cars[])
 
 }
 
+/** \brief
+ *
+ * \param duenos[] eDueno
+ * \param tamDuenos int
+ * \param cars[] eCars
+ * \param tamCars int
+ * \return void
+ *
+ */
 void mostrarPropietariosDeAudis(eDueno duenos[], int tamDuenos, eCars cars[], int tamCars)
 {
     int i, j, bandera = 1;
@@ -341,6 +527,13 @@ void mostrarPropietariosDeAudis(eDueno duenos[], int tamDuenos, eCars cars[], in
 
 }
 
+/** \brief
+ *
+ * \param duenos[] eDueno
+ * \param tam int
+ * \return void
+ *
+ */
 void modificarDueno(eDueno duenos[], int tam)
 {
     int i, id, bandera;
@@ -382,35 +575,61 @@ void modificarDueno(eDueno duenos[], int tam)
         printf("El ID no existe");
 }
 
+/** \brief
+ *
+ * \param duenos[] eDueno
+ * \param tamDuenos int
+ * \param cars[] eCars
+ * \param tam int
+ * \param arrayDeRecaudacion[] int
+ * \return void
+ *
+ */
 void egresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int arrayDeRecaudacion[])
 {
-    int i, esta, validar = 1, horaDeSalida, valorDeEstadia;
+    int esta, validar = 1, horaDeSalida, valorDeEstadia, id, estaDueno;
     char patente[30];
     char respuesta;
+    char aux[30];
 
 
-    printf("\nIngrese el la patente: ");
+    printf("\nIngrese el ID: ");
     fflush(stdin);
-    gets(patente);
+    gets(aux);
 
-    esta = buscarAtomovil(patente, cars, tam);
-
-    if (esta == -1)
+    while (validarNumero(aux) == 0)
     {
-        printf("Ese auto no existe");
+        printf("\nIngrese un ID valido: ");
+        fflush(stdin);
+        gets(aux);
+    }
+    id = atoi(aux);
+
+    estaDueno = buscarDueno(id, duenos, tamDuenos);
+
+    if (estaDueno == -1)
+    {
+        printf("\nEl ID no existe");
     }
     else
     {
-        for (i = 0; i < tamDuenos; i++)
+        printf("\nIngrese la patente: ");
+        fflush(stdin);
+        gets(patente);
+
+        esta = buscarAtomovil(patente, cars, tam);
+
+        if (esta == -1)
         {
-            if (cars[esta].dueno == duenos[i].idDueno)
-            {
-                break;
-            }
-
+            printf("\nLa patente no existe");
         }
+        else
+        {
 
-        printf("El dueno de este auto es \"%s\"? S/N \n", duenos[i].nombreYApellido);
+        if (cars[esta].dueno == duenos[estaDueno].idDueno)
+        {
+
+        printf("\nDesea retirar el auto con patente \"%s\" del dueno \"%s\"? S/N \n",cars[esta].patente ,duenos[estaDueno].nombreYApellido);
         fflush(stdin);
         scanf("%c", &respuesta);
 
@@ -422,18 +641,22 @@ void egresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int a
             {
                 validar = 0;
                 printf("Ingrese la hora de salida (sabiendo que ingreso a la(s) %dhs): ", cars[esta].horarioDeEntrada);
-                scanf("%d", &horaDeSalida);
+                fflush(stdin);
+                gets(aux);
 
-                while(horaDeSalida < 0 || horaDeSalida > 24)
+                while(validarNumero(aux) == 0 || atoi(aux) < cars[esta].horarioDeEntrada || atoi(aux) > 24)
                 {
                     printf("El auto ingreso a la(s) %dhs): ", cars[esta].horarioDeEntrada);
-                    printf("y no puede permanecer mas de un dia, ingrese una hora correta: ");
-                    scanf("%d", &horaDeSalida);
+                    printf("y no puede permanecer de un dia para el otro, ingrese una hora correta: ");
+                    fflush(stdin);
+                    gets(aux);
                 }
+
+                horaDeSalida = atoi(aux);
 
                 valorDeEstadia = calcularRecaudacionDeAuto(cars[esta].horarioDeEntrada, horaDeSalida, cars[esta].marca, arrayDeRecaudacion);
 
-                generarTicket(cars[esta], duenos[i], valorDeEstadia, cars[esta].marca);
+                generarTicket(cars[esta], duenos[estaDueno], valorDeEstadia, cars[esta].marca);
 
                 cars[esta].estado = 0;
 
@@ -451,9 +674,29 @@ void egresoAutmovil(eDueno duenos[], int tamDuenos, eCars cars[], int tam, int a
             scanf("%c", &respuesta);
             respuesta = tolower(respuesta);
         }
+        }
+        else
+        {
+            printf("Los datos no coinciden.");
+        }
+
+
+
+        }
+
+
     }
 }
 
+/** \brief
+ *
+ * \param horaDeEntrada int
+ * \param horaDeSalida int
+ * \param marca int
+ * \param arrayDeRecaudacion[] int
+ * \return int
+ *
+ */
 int calcularRecaudacionDeAuto(int horaDeEntrada, int horaDeSalida, int marca, int arrayDeRecaudacion[])
 {
     int costo;
@@ -480,8 +723,18 @@ int calcularRecaudacionDeAuto(int horaDeEntrada, int horaDeSalida, int marca, in
     return costo;
 }
 
+/** \brief
+ *
+ * \param car eCars
+ * \param dueno eDueno
+ * \param valorDeEstadia int
+ * \param marca int
+ * \return void
+ *
+ */
 void generarTicket(eCars car, eDueno dueno, int valorDeEstadia, int marca)
 {
+
     char marquita[20];
 
     printf("\n------------------------------------------------------------\n");
@@ -503,6 +756,14 @@ void generarTicket(eCars car, eDueno dueno, int valorDeEstadia, int marca)
     printf("\n------------------------------------------------------------\n");
 }
 
+/** \brief
+ *
+ * \param recaudacion int
+ * \param marca int
+ * \param arrayDeRecaudacion[] int
+ * \return void
+ *
+ */
 void recaudar(int recaudacion, int marca, int arrayDeRecaudacion[])
 {
     if (marca == ALPHA_ROMEO)
@@ -525,6 +786,12 @@ void recaudar(int recaudacion, int marca, int arrayDeRecaudacion[])
     arrayDeRecaudacion[TOTAL] = arrayDeRecaudacion[TOTAL] + recaudacion;
 }
 
+/** \brief
+ *
+ * \param arrayDeRecaudacion[] int
+ * \return void
+ *
+ */
 void mostrarRecaudacion(int arrayDeRecaudacion[])
 {
     printf("\n------------------------------------------------------------\n");

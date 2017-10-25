@@ -6,38 +6,78 @@
 
 #include "validaciones.h"
 
-int enteroValidado(char numero[])
+/** \brief
+ *
+ * \param numero[] char
+ * \return int
+ *
+ */
+int validarNumero(char numero[])
 {
-    int numerin, numerovalido;
+   int i = 0, devuelve = 1;
 
-    do
-    {
-        printf("Ingrese un numero: \n");
-        scanf("%s",numero);
-        numerin = validarEntero(numero);
+   while(numero[i] != '\0')
+   {
+       if(numero[i] < '0' || numero[i] > '9')
+       {
+           devuelve = 0;
+           break;
+       }
 
-    }
-    while(numerin == 0);
-
-    numerovalido = atoi(numero);
-
-    return numerovalido;
+       i++;
+   }
+   return devuelve;
 }
-int validarEntero(char num[])
+
+int pedirStringLetras(char mensaje[],char input[])
 {
-    int i, numero = 1;
-
-    for(i = 0; i<strlen(num); i++)
+    char aux[256];
+    pedirString(mensaje,aux);
+    if(validarSoloLetras(aux))
     {
-        if(!(isdigit(num[i])))
-        {
-            printf("\nNumero invalido! Reingrese: \n");
-            getch();
-            numero = 0;
-            break;
-        }
+        strcpy(input,aux);
+        return 1;
     }
-
-    return numero;
+    return 0;
 }
+
+void pedirString(char mensaje[],char input[])
+{
+    printf("%s",mensaje);
+    scanf ("%s", input);
+}
+
+int validarSoloLetras (char str[])
+{
+   int i = 0, devuelve = 1;
+
+   while(str[i] != '\0')
+   {
+       if((str[i] < 'a' || str[i] > 'z') && (str[i] < 'A' || str[i] > 'Z'))
+       {
+           devuelve = 0;
+           break;
+       }
+       i++;
+   }
+
+   return devuelve;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
